@@ -210,6 +210,75 @@ nav a .bi {
     font-size: 1.1em; /* Torna o ícone do menu um pouco maior */
 }
 
+/* --- NOVAS REGRAS: Seção de Criadores --- */
+
+.criadores-container {
+    display: flex;
+    flex-wrap: wrap;        /* Permite que os cards quebrem a linha em telas menores */
+    justify-content: center;/* Centraliza os cards */
+    gap: 24px;              /* Espaçamento entre os cards */
+    margin-top: 30px;       /* Espaço abaixo do parágrafo da seção */
+}
+
+.criador-card {
+    background-color: var(--cor-fundo-secao);
+    border: 1px solid var(--cor-borda-leve);
+    border-radius: 10px;    /* Mesma borda da seção */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07); /* Mesma sombra da seção */
+    padding: 24px;
+    text-align: center;
+    width: 280px;           /* Largura fixa para cada card */
+    transition: all 0.3s ease-in-out;
+}
+
+.criador-card:hover {
+    transform: translateY(-5px); /* Efeito de "levantar" no hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.criador-foto {
+    width: 120px;           /* Tamanho da foto */
+    height: 120px;
+    border-radius: 50%;     /* Deixa a foto redonda */
+    object-fit: cover;      /* Garante que a foto cubra o espaço sem distorcer */
+    margin-bottom: 16px;
+    border: 3px solid var(--cor-borda-heading); /* Borda sutil com a cor do tema */
+    background-color: var(--cor-fundo); /* Cor de fundo caso a imagem falhe */
+}
+
+.criador-card h4 {
+    font-size: 1.3em;
+    font-weight: 600;
+    color: var(--cor-principal);
+    margin: 0 0 4px 0;      /* Remove margem superior e ajusta a inferior */
+}
+
+.criador-card p {
+    font-size: 0.95em;
+    color: var(--cor-texto);
+    margin: 0;
+    text-align: center;     /* Centraliza a descrição */
+}
+
+.criador-links {
+    margin-top: 16px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;              /* Espaço entre os ícones */
+}
+
+.criador-links a {
+    color: var(--cor-principal);
+    font-size: 1.8em;       /* Tamanho dos ícones (GitHub/LinkedIn) */
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.criador-links a:hover {
+    color: var(--cor-principal-hover);
+    transform: scale(1.15); /* Aumenta o ícone no hover */
+}
+
 /* --- Rodapé --- */
 footer {
     margin-left: var(--largura-menu);
