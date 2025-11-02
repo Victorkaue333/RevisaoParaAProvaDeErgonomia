@@ -1,5 +1,7 @@
 # 📚 Revisão para Prova: Ergonomia Aplicada
 
+Link do site: https://revisaoparaaprovadeergonomia-production.up.railway.app/
+
 Este é um projeto de página web criado como um material de estudo interativo para a disciplina de Ergonomia Aplicada. O site compila o conteúdo principal da disciplina em um formato de página única (single-page) com navegação lateral, facilitando a revisão para a prova.
 
 ## 🚀 Visão Geral
