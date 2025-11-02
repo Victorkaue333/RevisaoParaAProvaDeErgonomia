@@ -1,11 +1,18 @@
 /* --- Configurações Globais --- */
 :root {
-    --cor-principal: #004a99;
-    --cor-secundaria: #e0e8f0;
-    --cor-fundo: #f4f7f6;
+    /* Paleta de cores suave (tons de azul-ardósia e cinza) */
+    --cor-principal: #4a6988;         /* Azul-ardósia principal */
+    --cor-principal-hover: #3a536c;   /* Azul-ardósia mais escuro (para hovers) */
+    --cor-secundaria: #eef2f6;       /* Azul-ardósia bem claro (para fundos de hover) */
+    --cor-borda-heading: #cdd8e2;    /* Azul-ardósia claro para bordas de título */
+    
+    --cor-fundo: #f4f7f6;            /* Fundo geral (cinza-claro suave) */
     --cor-fundo-secao: #ffffff;
-    --cor-texto: #333;
-    --cor-cabecalho-texto: #ffffff;
+    --cor-texto: #454545;            /* Cor de texto (cinza-escuro suave) */
+    --cor-texto-cabecalho: #ffffff;
+    --cor-borda-leve: #e0e0e0;       /* Cinza neutro para bordas */
+    --cor-fundo-rodape: #343a40;     /* Cinza-carvão para o rodapé */
+
     --altura-cabecalho: 60px;
     --largura-menu: 240px;
 }
@@ -13,7 +20,7 @@
 /* Scroll-behavior e box-sizing */
 html {
     scroll-behavior: smooth;
-    box-sizing: border-box; /* Garante que padding/border não afetem a largura final */
+    box-sizing: border-box;
 }
 
 /* Herda o box-sizing para todos os elementos */
@@ -22,19 +29,21 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    /* Pilha de fontes moderna: usa a fonte padrão do sistema do usuário */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     margin: 0;
     padding: 0;
     background-color: var(--cor-fundo);
     color: var(--cor-texto);
-    padding-top: var(--altura-cabecalho); /* Espaço para o cabeçalho fixo */
+    padding-top: var(--altura-cabecalho);
+    line-height: 1.6; /* Melhora a legibilidade do texto */
 }
 
 /* --- Cabeçalho Fixo --- */
 header {
     background-color: var(--cor-principal);
-    color: var(--cor-cabecalho-texto);
-    padding: 0 20px;
+    color: var(--cor-texto-cabecalho);
+    padding: 0 24px;
     height: var(--altura-cabecalho);
     line-height: var(--altura-cabecalho);
     position: fixed;
@@ -43,17 +52,19 @@ header {
     width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: box-shadow 0.3s ease-in-out; /* Transição para o efeito de rolagem */
 }
 
 header h1 {
     margin: 0;
     font-size: 1.5em;
-    transition: font-size 0.2s ease; /* Adiciona transição suave */
+    font-weight: 600; /* Um pouco mais de peso */
+    transition: font-size 0.2s ease;
     
-    /* --- CORREÇÃO 1: Impede que o título quebre a linha --- */
-    white-space: nowrap;      /* Impede que o texto quebre a linha */
-    overflow: hidden;         /* Esconde o texto que transbordar */
-    text-overflow: ellipsis;  /* Adiciona "..." no final do texto cortado */
+    /* Impede que o título quebre a linha em telas pequenas */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* --- Menu de Navegação Lateral --- */
@@ -62,13 +73,25 @@ nav {
     top: var(--altura-cabecalho);
     left: 0;
     width: var(--largura-menu);
-    height: calc(100vh - var(--altura-cabecalho)); /* Altura total menos o cabeçalho */
+    height: calc(100vh - var(--altura-cabecalho));
     background-color: var(--cor-fundo-secao);
-    border-right: 1px solid #ddd;
-    overflow-y: auto; /* Permite rolar o menu se tiver muitos itens */
-    padding: 20px 0;
+    border-right: 1px solid var(--cor-borda-leve);
+    overflow-y: auto;
+    padding: 16px 0;
     z-index: 900;
-    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
+    transition: all 0.3s ease-in-out;
+}
+
+/* Estilização da barra de rolagem do menu */
+nav::-webkit-scrollbar {
+    width: 6px;
+}
+nav::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+nav::-webkit-scrollbar-track {
+    background-color: var(--cor-fundo);
 }
 
 nav ul {
@@ -82,152 +105,207 @@ nav li {
 }
 
 nav a {
-    display: block;
-    padding: 12px 20px;
+    display: flex;         /* Ativa o Flexbox para ícones */
+    align-items: center;   /* Alinha o ícone e o texto verticalmente */
+    gap: 12px;             /* Cria um espaço entre o ícone e o texto */
+    padding: 14px 24px;
+    margin: 4px 10px; 
     text-decoration: none;
-    color: var(--cor-principal);
+    color: var(--cor-principal); 
     font-size: 0.95em;
+    font-weight: 500; 
     border-left: 4px solid transparent;
+    border-radius: 6px; 
     transition: all 0.2s ease-in-out;
 }
 
 nav a:hover {
     background-color: var(--cor-secundaria);
-    font-weight: bold;
+    color: var(--cor-principal-hover);
+    transform: translateX(3px); /* Leve movimento ao passar o mouse */
 }
 
 /* Classe ativa para o link do menu */
 nav a.active {
     background-color: var(--cor-secundaria);
-    border-left: 4px solid var(--cor-principal);
-    font-weight: bold;
+    border-left-color: var(--cor-principal);
+    color: var(--cor-principal-hover);
+    font-weight: 600; /* Mais destaque para o item ativo */
 }
 
 /* --- Conteúdo Principal --- */
 main {
-    margin-left: var(--largura-menu); /* Empurra o conteúdo para depois do menu */
-    padding: 30px;
-    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
+    margin-left: var(--largura-menu);
+    padding: 32px;
+    transition: all 0.3s ease-in-out;
 }
 
 /* --- Estilo das Seções --- */
 section {
     background-color: var(--cor-fundo-secao);
     margin-bottom: 25px;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    border: 1px solid #e0e0e0;
-    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
+    padding: 24px 30px; 
+    border-radius: 10px; 
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07); /* Sombra mais suave */
+    border: 1px solid var(--cor-borda-leve);
+    transition: all 0.3s ease-in-out;
 }
 
 section h2 {
-    font-size: 1.8em;
+    display: flex;       /* Alinha ícones no H2 */
+    align-items: center;
+    gap: 12px;
+    font-size: 1.9em;
     color: var(--cor-principal);
-    border-bottom: 2px solid var(--cor-secundaria);
+    border-bottom: 3px solid var(--cor-borda-heading); /* Borda mais visível */
     padding-bottom: 10px;
     margin-top: 0;
+    margin-bottom: 24px; 
+    letter-spacing: -0.5px;
 }
 
 section h3 {
-    font-size: 1.3em;
-    color: #333;
-    margin-top: 20px;
-    margin-bottom: 10px;
+    font-size: 1.4em;
+    color: var(--cor-principal); 
+    font-weight: 600;
+    margin-top: 30px;
+    margin-bottom: 12px;
 }
 
 section p {
-    font-size: 1.1em;
-    line-height: 1.6;
+    font-size: 1rem; 
+    line-height: 1.7; /* Maior altura de linha */
     text-align: justify;
-    margin-bottom: 15px;
+    margin-bottom: 16px;
+}
+
+/* Estilos para listas (ul, ol) dentro das seções */
+section ul, section ol {
+    padding-left: 20px;
+    margin-bottom: 16px;
+    line-height: 1.7;
+}
+
+section li {
+    margin-bottom: 10px;
+}
+
+/* Alinha ícones nos links de Quiz e Download */
+section ul li a {
+    display: inline-flex; 
+    align-items: center;
+    gap: 8px;
+    text-decoration: none; 
+    color: var(--cor-principal);
+    font-weight: 500;
+}
+
+section ul li a:hover {
+    color: var(--cor-principal-hover);
+    text-decoration: underline;
+}
+
+/* Ajuste fino no tamanho dos ícones do menu */
+nav a .bi {
+    font-size: 1.1em; /* Torna o ícone do menu um pouco maior */
 }
 
 /* --- Rodapé --- */
 footer {
-    margin-left: var(--largura-menu); /* Alinha com o conteúdo principal */
+    margin-left: var(--largura-menu);
     text-align: center;
-    padding: 25px;
-    background-color: #333;
-    color: #f0f0f0;
+    padding: 30px 25px;
+    background-color: var(--cor-fundo-rodape);
+    color: #bbb; /* Cor de texto mais suave */
     font-style: italic;
-    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
+    font-size: 0.9em;
+    margin-top: 30px;
+    transition: all 0.3s ease-in-out;
 }
 
 /* --- Responsividade (Telas Médias / Tablets - até 900px) --- */
 @media (max-width: 900px) {
     body {
-        padding-top: var(--altura-cabecalho); /* Mantém espaço do cabeçalho */
+        padding-top: var(--altura-cabecalho);
     }
 
-    /* Ajusta o H1 para não quebrar em telas médias */
+    header {
+        padding: 0 20px;
+    }
+    
     header h1 {
         font-size: 1.3em; 
     }
 
     nav {
-        position: relative; /* Deixa de ser fixo */
+        position: relative;
         width: 100%;
         height: auto;
         top: auto;
         left: auto;
         border-right: none;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid var(--cor-borda-leve);
         padding: 0;
-        display: flex; /* Faz o menu ficar horizontal */
-        overflow-x: auto; /* Permite rolar o menu horizontalmente */
-        background-color: #fdfdfd;
+        display: flex;
+        overflow-x: auto;
+        background-color: #ffffff; 
         z-index: 800;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05); 
     }
 
     nav ul {
-        display: flex; /* Coloca os LIs em linha */
-        /* --- CORREÇÃO 2: 'width: 100%;' removido מכאן --- */
-        /* Isso permite que o 'ul' seja mais largo que a tela, ativando o overflow-x do 'nav' */
+        display: flex;
     }
 
     nav li {
-        flex-shrink: 0; /* Impede que os itens encolham */
+        flex-shrink: 0;
     }
     
     nav a {
         padding: 15px;
         border-left: none;
+        border-radius: 0; /* Remove radius da versão mobile */
+        margin: 0;
         border-bottom: 4px solid transparent;
         text-align: center;
         font-size: 0.9em;
+        color: var(--cor-principal);
     }
 
     nav a:hover {
         border-left: none;
-        border-bottom: 4px solid var(--cor-principal);
+        border-bottom-color: var(--cor-borda-heading);
+        color: var(--cor-principal-hover);
         background-color: var(--cor-secundaria);
+        transform: none; /* Remove o efeito de translate */
     }
 
     nav a.active {
         border-left: none;
-        border-bottom: 4px solid var(--cor-principal);
+        border-bottom-color: var(--cor-principal);
+        color: var(--cor-principal-hover);
+        font-weight: 600;
     }
 
     main {
-        margin-left: 0; /* Ocupa a largura total */
-        padding: 20px 15px; /* Reduz padding lateral */
+        margin-left: 0;
+        padding: 20px 15px;
     }
     
     section {
-        padding: 20px; /* Reduz padding da seção */
+        padding: 20px;
     }
 
     footer {
-        margin-left: 0; /* Ocupa a largura total */
+        margin-left: 0;
     }
 
     section h2 {
-        font-size: 1.5em;
+        font-size: 1.6em;
     }
     
     section h3 {
-        font-size: 1.2em;
+        font-size: 1.25em;
     }
 
     section p {
@@ -237,39 +315,43 @@ footer {
 
 /* --- Responsividade (Telas Pequenas / Celulares - até 600px) --- */
 @media (max-width: 600px) {
+    /* Define um tamanho de fonte base menor para celulares */
+    body {
+        font-size: 15px; 
+    }
+
     header {
-        padding: 0 15px; /* Menos padding no cabeçalho */
+        padding: 0 15px;
     }
 
     header h1 {
-        font-size: 1.2em; /* Fonte do título menor */
+        font-size: 1.2em;
     }
     
-    /* Itens do menu menores para caberem mais */
     nav a {
         padding: 12px 10px;
-        font-size: 0.85em;
+        font-size: 0.9em; /* Relativo ao novo body font-size */
     }
 
     main {
-        padding: 15px 10px; /* Mais redução de padding */
+        padding: 15px 10px;
     }
 
     section {
-        padding: 15px; /* Mais redução de padding */
+        padding: 15px;
     }
 
     section h2 {
-        font-size: 1.3em;
+        font-size: 1.4em;
     }
     
     section h3 {
-        font-size: 1.1em;
+        font-size: 1.15em;
     }
 
     section p {
-        font-size: 0.95em; /* Fonte do parágrafo menor */
-        line-height: 1.5;
+        font-size: 1em;
+        line-height: 1.6;
     }
     
     footer {
@@ -280,9 +362,57 @@ footer {
 
 /* --- Responsividade (Telas Muito Grandes - 1600px ou mais) --- */
 @media (min-width: 1600px) {
+    main {
+        padding: 40px;
+    }
+    
+    /* Limita a largura das seções para melhor legibilidade */
     section {
         max-width: 1100px;
         margin-left: auto;
         margin-right: auto;
     }
+}
+
+/* --- O QUE FALTAVA: Estilos para os Novos Efeitos JS --- */
+
+/* 1. Sombra do Cabeçalho ao Rolar */
+header.header-scrolled {
+    /* Sombra que aparece ao rolar */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Botão "Voltar ao Topo" */
+.back-to-top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--cor-principal);
+    color: var(--cor-texto-cabecalho);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    text-decoration: none;
+    
+    /* Começa invisível */
+    opacity: 0;
+    visibility: hidden;
+    
+    transition: all 0.3s ease-in-out;
+    z-index: 1001; /* Garante que fique acima de outros elementos */
+}
+
+/* Classe 'visible' que o JS adiciona */
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    background-color: var(--cor-principal-hover);
+    transform: translateY(-3px); /* Efeito de "levantar" */
 }
