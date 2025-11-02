@@ -10,9 +10,15 @@
     --largura-menu: 240px;
 }
 
-/* Scroll-behavior para links âncora */
+/* Scroll-behavior e box-sizing */
 html {
     scroll-behavior: smooth;
+    box-sizing: border-box; /* Garante que padding/border não afetem a largura final */
+}
+
+/* Herda o box-sizing para todos os elementos */
+*, *::before, *::after {
+    box-sizing: inherit;
 }
 
 body {
@@ -42,6 +48,12 @@ header {
 header h1 {
     margin: 0;
     font-size: 1.5em;
+    transition: font-size 0.2s ease; /* Adiciona transição suave */
+    
+    /* --- CORREÇÃO 1: Impede que o título quebre a linha --- */
+    white-space: nowrap;      /* Impede que o texto quebre a linha */
+    overflow: hidden;         /* Esconde o texto que transbordar */
+    text-overflow: ellipsis;  /* Adiciona "..." no final do texto cortado */
 }
 
 /* --- Menu de Navegação Lateral --- */
@@ -56,6 +68,7 @@ nav {
     overflow-y: auto; /* Permite rolar o menu se tiver muitos itens */
     padding: 20px 0;
     z-index: 900;
+    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
 }
 
 nav ul {
@@ -94,6 +107,7 @@ nav a.active {
 main {
     margin-left: var(--largura-menu); /* Empurra o conteúdo para depois do menu */
     padding: 30px;
+    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
 }
 
 /* --- Estilo das Seções --- */
@@ -104,6 +118,7 @@ section {
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     border: 1px solid #e0e0e0;
+    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
 }
 
 section h2 {
@@ -136,12 +151,18 @@ footer {
     background-color: #333;
     color: #f0f0f0;
     font-style: italic;
+    transition: all 0.3s ease-in-out; /* Transição para mudanças responsivas */
 }
 
-/* --- Responsividade (para telas menores que 900px) --- */
+/* --- Responsividade (Telas Médias / Tablets - até 900px) --- */
 @media (max-width: 900px) {
     body {
         padding-top: var(--altura-cabecalho); /* Mantém espaço do cabeçalho */
+    }
+
+    /* Ajusta o H1 para não quebrar em telas médias */
+    header h1 {
+        font-size: 1.3em; 
     }
 
     nav {
@@ -161,7 +182,8 @@ footer {
 
     nav ul {
         display: flex; /* Coloca os LIs em linha */
-        width: 100%;
+        /* --- CORREÇÃO 2: 'width: 100%;' removido מכאן --- */
+        /* Isso permite que o 'ul' seja mais largo que a tela, ativando o overflow-x do 'nav' */
     }
 
     nav li {
@@ -189,7 +211,11 @@ footer {
 
     main {
         margin-left: 0; /* Ocupa a largura total */
-        padding: 20px;
+        padding: 20px 15px; /* Reduz padding lateral */
+    }
+    
+    section {
+        padding: 20px; /* Reduz padding da seção */
     }
 
     footer {
@@ -199,8 +225,64 @@ footer {
     section h2 {
         font-size: 1.5em;
     }
+    
+    section h3 {
+        font-size: 1.2em;
+    }
 
     section p {
         font-size: 1em;
+    }
+}
+
+/* --- Responsividade (Telas Pequenas / Celulares - até 600px) --- */
+@media (max-width: 600px) {
+    header {
+        padding: 0 15px; /* Menos padding no cabeçalho */
+    }
+
+    header h1 {
+        font-size: 1.2em; /* Fonte do título menor */
+    }
+    
+    /* Itens do menu menores para caberem mais */
+    nav a {
+        padding: 12px 10px;
+        font-size: 0.85em;
+    }
+
+    main {
+        padding: 15px 10px; /* Mais redução de padding */
+    }
+
+    section {
+        padding: 15px; /* Mais redução de padding */
+    }
+
+    section h2 {
+        font-size: 1.3em;
+    }
+    
+    section h3 {
+        font-size: 1.1em;
+    }
+
+    section p {
+        font-size: 0.95em; /* Fonte do parágrafo menor */
+        line-height: 1.5;
+    }
+    
+    footer {
+        padding: 20px 10px;
+        font-size: 0.9em;
+    }
+}
+
+/* --- Responsividade (Telas Muito Grandes - 1600px ou mais) --- */
+@media (min-width: 1600px) {
+    section {
+        max-width: 1100px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
