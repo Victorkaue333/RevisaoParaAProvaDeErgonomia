@@ -1,0 +1,206 @@
+/* --- Configurações Globais --- */
+:root {
+    --cor-principal: #004a99;
+    --cor-secundaria: #e0e8f0;
+    --cor-fundo: #f4f7f6;
+    --cor-fundo-secao: #ffffff;
+    --cor-texto: #333;
+    --cor-cabecalho-texto: #ffffff;
+    --altura-cabecalho: 60px;
+    --largura-menu: 240px;
+}
+
+/* Scroll-behavior para links âncora */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    padding-top: var(--altura-cabecalho); /* Espaço para o cabeçalho fixo */
+}
+
+/* --- Cabeçalho Fixo --- */
+header {
+    background-color: var(--cor-principal);
+    color: var(--cor-cabecalho-texto);
+    padding: 0 20px;
+    height: var(--altura-cabecalho);
+    line-height: var(--altura-cabecalho);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+/* --- Menu de Navegação Lateral --- */
+nav {
+    position: fixed;
+    top: var(--altura-cabecalho);
+    left: 0;
+    width: var(--largura-menu);
+    height: calc(100vh - var(--altura-cabecalho)); /* Altura total menos o cabeçalho */
+    background-color: var(--cor-fundo-secao);
+    border-right: 1px solid #ddd;
+    overflow-y: auto; /* Permite rolar o menu se tiver muitos itens */
+    padding: 20px 0;
+    z-index: 900;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--cor-principal);
+    font-size: 0.95em;
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+nav a:hover {
+    background-color: var(--cor-secundaria);
+    font-weight: bold;
+}
+
+/* Classe ativa para o link do menu */
+nav a.active {
+    background-color: var(--cor-secundaria);
+    border-left: 4px solid var(--cor-principal);
+    font-weight: bold;
+}
+
+/* --- Conteúdo Principal --- */
+main {
+    margin-left: var(--largura-menu); /* Empurra o conteúdo para depois do menu */
+    padding: 30px;
+}
+
+/* --- Estilo das Seções --- */
+section {
+    background-color: var(--cor-fundo-secao);
+    margin-bottom: 25px;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+}
+
+section h2 {
+    font-size: 1.8em;
+    color: var(--cor-principal);
+    border-bottom: 2px solid var(--cor-secundaria);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+
+section h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+section p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+/* --- Rodapé --- */
+footer {
+    margin-left: var(--largura-menu); /* Alinha com o conteúdo principal */
+    text-align: center;
+    padding: 25px;
+    background-color: #333;
+    color: #f0f0f0;
+    font-style: italic;
+}
+
+/* --- Responsividade (para telas menores que 900px) --- */
+@media (max-width: 900px) {
+    body {
+        padding-top: var(--altura-cabecalho); /* Mantém espaço do cabeçalho */
+    }
+
+    nav {
+        position: relative; /* Deixa de ser fixo */
+        width: 100%;
+        height: auto;
+        top: auto;
+        left: auto;
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+        padding: 0;
+        display: flex; /* Faz o menu ficar horizontal */
+        overflow-x: auto; /* Permite rolar o menu horizontalmente */
+        background-color: #fdfdfd;
+        z-index: 800;
+    }
+
+    nav ul {
+        display: flex; /* Coloca os LIs em linha */
+        width: 100%;
+    }
+
+    nav li {
+        flex-shrink: 0; /* Impede que os itens encolham */
+    }
+    
+    nav a {
+        padding: 15px;
+        border-left: none;
+        border-bottom: 4px solid transparent;
+        text-align: center;
+        font-size: 0.9em;
+    }
+
+    nav a:hover {
+        border-left: none;
+        border-bottom: 4px solid var(--cor-principal);
+        background-color: var(--cor-secundaria);
+    }
+
+    nav a.active {
+        border-left: none;
+        border-bottom: 4px solid var(--cor-principal);
+    }
+
+    main {
+        margin-left: 0; /* Ocupa a largura total */
+        padding: 20px;
+    }
+
+    footer {
+        margin-left: 0; /* Ocupa a largura total */
+    }
+
+    section h2 {
+        font-size: 1.5em;
+    }
+
+    section p {
+        font-size: 1em;
+    }
+}
